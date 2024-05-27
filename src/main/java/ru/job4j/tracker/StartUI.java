@@ -7,7 +7,7 @@ public class StartUI {
     private Item item;
 
     public StartUI(int id) {
-        this.item = new Item(id);
+        this.item = new Item();
     }
 
     public Item getItem() {
