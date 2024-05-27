@@ -53,8 +53,6 @@ public class Tracker {
         return false;
     }
 
-    // 1 2 3 4 5
-
     public void delete(int id) {
         int index = indexOf(id);
         if (index != -1) {
