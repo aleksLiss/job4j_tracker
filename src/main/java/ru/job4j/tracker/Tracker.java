@@ -48,10 +48,22 @@ public class Tracker {
         item.setId(id);
         if (findById(id) != null) {
             int index = indexOf(id);
-            items[index] = item;
+            items[indexOf(id)] = item;
             return true;
         }
         return false;
+    }
+
+    // 1 2 3 4 5
+
+    public void delete(int id) {
+        int index = indexOf(id);
+        if (index != -1) {
+            items[index] = null;
+            System.arraycopy(items, 3, items, 2, size - index - 1);
+            items[size - 1] = null;
+            size--;
+        }
     }
 
     private int indexOf(int id) {
