@@ -6,11 +6,8 @@ import java.util.Objects;
 public class License {
 
     private String owner;
-
     private String model;
-
     private String code;
-
     private Date created;
 
     public String getOwner() {
@@ -54,7 +51,10 @@ public class License {
             return false;
         }
         License license = (License) o;
-        return Objects.equals(owner, license.owner) && Objects.equals(model, license.model) && Objects.equals(code, license.code) && Objects.equals(created, license.created);
+        return Objects.equals(owner, license.owner)
+                && Objects.equals(model, license.model)
+                && Objects.equals(code, license.code)
+                && Objects.equals(created, license.created);
     }
 
     @Override
