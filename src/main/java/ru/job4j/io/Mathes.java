@@ -12,16 +12,16 @@ public class Mathes {
             String player = turn ? "Первый игрок" : "Второй игрок";
             System.out.println(player + " введите число от 1 до 3:");
             int mathes = Integer.parseInt(input.nextLine());
-            turn = !turn;
-            while (!(mathes > 0 && mathes < 4 && mathes <= count)) {
+            if (!(mathes > 0 && mathes < 4 && mathes <= count)) {
                 System.out.println(player
                         + " введите число от 1 до 3 и что бы число было не больше "
                         + count
-                        + ": ");
-                mathes = Integer.parseInt(input.nextLine());
+                        + ".");
+            } else {
+                turn = !turn;
+                count -= mathes;
+                System.out.println("Остаток спичек: " + count);
             }
-            count -= mathes;
-            System.out.println("Остаток спичек: " + count);
         }
         if (!turn) {
             System.out.println("Выиграл первый игрок");
