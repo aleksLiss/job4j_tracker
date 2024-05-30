@@ -12,12 +12,7 @@ public class Mathes {
             String player = turn ? "Первый игрок" : "Второй игрок";
             System.out.println(player + " введите число от 1 до 3:");
             int mathes = Integer.parseInt(input.nextLine());
-            if (!(mathes > 0 && mathes < 4 && mathes <= count)) {
-                System.out.println(player
-                        + " введите число от 1 до 3 и что бы число было не больше "
-                        + count
-                        + ".");
-            } else {
+            if ((mathes > 0 && mathes < 4 && mathes <= count)) {
                 turn = !turn;
                 count -= mathes;
                 System.out.println("Остаток спичек: " + count);
