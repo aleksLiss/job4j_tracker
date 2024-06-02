@@ -7,8 +7,7 @@ public class StartUI {
             showMenu();
             int select = input.askInt("Enter number: ");
             if (select == 0) {
-                System.out.print("=== Создание новой заявки ===");
-                System.out.print("Введите имя: ");
+                System.out.println("=== Создание новой заявки ===");
                 String name = input.askStr("Enter name: ");
                 Item item = new Item(name);
                 tracker.add(item);
@@ -25,9 +24,7 @@ public class StartUI {
                 }
             } else if (select == 2) {
                 System.out.println("=== Редактирование заявки ===");
-                System.out.print("Введите id: ");
                 int id = input.askInt("Enter id: ");
-                System.out.print("Введите имя: ");
                 String name = input.askStr("Enter name: ");
                 Item item = new Item(name);
                 if (tracker.replace(id, item)) {
@@ -37,14 +34,12 @@ public class StartUI {
                 }
             } else if (select == 3) {
                 System.out.println("=== Удаление заявки ===");
-                System.out.print("Введите id: ");
                 int id = input.askInt("Enter id: ");
                 Item item = tracker.findById(id);
                 tracker.delete(id);
                 System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
             } else if (select == 4) {
                 System.out.println("=== Вывод заявки по id ===");
-                System.out.print("Введите id: ");
                 int id = input.askInt("Enter id: ");
                 Item item = tracker.findById(id);
                 if (item != null) {
@@ -54,7 +49,6 @@ public class StartUI {
                 }
             } else if (select == 5) {
                 System.out.println("=== Вывод заявок по имени ===");
-                System.out.print("Введите имя: ");
                 String name = input.askStr("Enter name: ");
                 Item[] items = tracker.findByName(name);
                 if (items.length > 0) {
