@@ -5,10 +5,10 @@ import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.output.Output;
 import ru.job4j.tracker.pojo.Item;
 
-public class Delete implements UserAction {
+public class DeleteAction implements UserAction {
     private final Output output;
 
-    public Delete(Output output) {
+    public DeleteAction(Output output) {
         this.output = output;
     }
 
