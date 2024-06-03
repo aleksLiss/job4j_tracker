@@ -23,7 +23,7 @@
         Item[] items = tracker.findAll();
         if (items.length > 0) {
             for (Item item : items) {
-                output.println(item.getName());
+                output.println(item);
             }
         } else {
             output.println("Хранилище еще не содержит заявок");
