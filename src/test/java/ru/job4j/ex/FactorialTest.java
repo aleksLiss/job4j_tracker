@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FactorialTest {
 
     @Test
-    void calc() {
+    void whenCalcThenAssertThrows() {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> {
@@ -17,5 +17,13 @@ class FactorialTest {
         );
         String expected = "Number could not be less than 0";
         assertThat(exception.getMessage()).isEqualTo(expected);
+    }
+
+    @Test
+    void whenInput5Then120() {
+        int input = 5;
+        int result = Factorial.calc(5);
+        int expected = 120;
+        assertThat(result).isEqualTo(expected);
     }
 }
