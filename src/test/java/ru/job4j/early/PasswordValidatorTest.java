@@ -15,7 +15,6 @@ class PasswordValidatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
-
     @Test
     void whenPasswordIsNull() {
         IllegalArgumentException exception = assertThrows(
@@ -25,7 +24,6 @@ class PasswordValidatorTest {
         String expected = "Password can't be null";
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
-
 
     @Test
     void whenPasswordLengthLess8() {
@@ -38,7 +36,6 @@ class PasswordValidatorTest {
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
 
-
     @Test
     void whenPasswordLengthMore32() {
         String password = "Ln2$mrTY3245nMdsdfdfPPPg$#dg124531";
@@ -49,7 +46,6 @@ class PasswordValidatorTest {
         String expected = "Password should be length [8, 32]";
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
-
 
     @Test
     void whenPasswordNotContainUpperCaseLetter() {
@@ -62,7 +58,6 @@ class PasswordValidatorTest {
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
 
-
     @Test
     void whenPasswordNotContainLowerCaseLetter() {
         String password = "LN2$MRTY12";
@@ -73,7 +68,6 @@ class PasswordValidatorTest {
         String expected = "Password should contain at least one lowercase letter";
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
-
 
     @Test
     void whenPasswordNotContainFigure() {
@@ -86,7 +80,6 @@ class PasswordValidatorTest {
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
 
-
     @Test
     void whenPasswordNotContainSpecialSymbol() {
         String password = "Ln2pmrTY12";
@@ -97,7 +90,6 @@ class PasswordValidatorTest {
         String expected = "Password should contain at least one special symbol";
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
-
 
     @Test
     void whenPasswordContainSubstringQWERTY() {
@@ -110,7 +102,6 @@ class PasswordValidatorTest {
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
 
-
     @Test
     void whenPasswordContainSubstring12345() {
         String password = "Ln2$mrTY12345";
@@ -121,7 +112,6 @@ class PasswordValidatorTest {
         String expected = "Password shouldn't contain substrings: qwerty, 12345, password, admin, user";
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
-
 
     @Test
     void whenPasswordContainSubstringPassword() {
@@ -134,7 +124,6 @@ class PasswordValidatorTest {
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
 
-
     @Test
     void whenPasswordContainSubstringAdmin() {
         String password = "Ln2$aDmiNrTY12";
@@ -145,7 +134,6 @@ class PasswordValidatorTest {
         String expected = "Password shouldn't contain substrings: qwerty, 12345, password, admin, user";
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
-
 
     @Test
     void whenPasswordContainSubstringUser() {
