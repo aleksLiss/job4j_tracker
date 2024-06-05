@@ -17,17 +17,17 @@ public class PasswordValidator {
         boolean hasSpecial = false;
 
         for (char symbol : password.toCharArray()) {
+            if (hasDigit && hasSpecial && hasLowCase && hasUpCase) {
+                break;
+            }
             if (Character.isUpperCase(symbol)) {
                 hasUpCase = true;
-                continue;
             }
             if (Character.isLowerCase(symbol)) {
                 hasLowCase = true;
-                continue;
             }
             if (Character.isDigit(symbol)) {
                 hasDigit = true;
-                continue;
             }
             if (!Character.isLetterOrDigit(symbol)) {
                 hasSpecial = true;
