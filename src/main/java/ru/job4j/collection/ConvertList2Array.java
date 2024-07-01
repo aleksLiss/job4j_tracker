@@ -14,9 +14,9 @@ public class ConvertList2Array {
             if (cell >= cells - 1) {
                 row++;
                 cell = 0;
-                continue;
+            } else {
+                cell++;
             }
-            cell++;
         }
         return array;
     }
