@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BankService {
+
     private final Map<User, List<Account>> users = new HashMap<>();
 
     public void addUser(User user) {
