@@ -6,13 +6,8 @@ import java.util.Set;
 
 public class FullSearch {
 
-    private Set<String> numbers;
-
-    public FullSearch() {
-        this.numbers = new HashSet<>();
-    }
-
     public Set<String> extractNumber(List<Task> taskList) {
+        Set<String> numbers = new HashSet<>();
         for (Task task : taskList) {
             numbers.add(task.getNumber());
         }

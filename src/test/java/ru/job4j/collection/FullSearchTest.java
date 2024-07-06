@@ -10,7 +10,6 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FullSearchTest {
-    
     @Test
     public void extractNumber() {
         FullSearch fullSearch = new FullSearch();
