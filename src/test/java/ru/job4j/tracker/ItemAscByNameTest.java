@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.*;
 
 
 class ItemAscByNameTest {
-
     @Test
     void sortAscByNameTest() {
         List<Item> items = new ArrayList<>(List.of(
