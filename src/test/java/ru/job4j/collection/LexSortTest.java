@@ -7,6 +7,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LexSortTest {
+
     @Test
     public void sortNum1and2and10() {
         String[] input = {
