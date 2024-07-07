@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class ItemDescByNameTest {
+
     @Test
     void sortDescByNameTest() {
         List<Item> items = new ArrayList<>(List.of(
