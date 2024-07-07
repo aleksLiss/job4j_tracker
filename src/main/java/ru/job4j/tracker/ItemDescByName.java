@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import ru.job4j.tracker.pojo.Item;
-
 import java.util.Comparator;
 
 public class ItemDescByName implements Comparator<Item> {
