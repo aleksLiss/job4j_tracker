@@ -5,7 +5,6 @@ import java.util.Comparator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JobTest {
-
     @Test
     void whenCompareByNameByAsc() {
         Comparator<Job> cmpNamePriority = new JobAscByName();
@@ -27,7 +26,7 @@ public class JobTest {
     }
 
     @Test
-    void whenCompareByPriorityByAsc () {
+    void whenCompareByPriorityByAsc() {
         Comparator<Job> cmpNamePriority = new JobAscByPriority();
         int result = cmpNamePriority.compare(
                 new Job("Go outside", 0),
@@ -37,8 +36,7 @@ public class JobTest {
     }
 
     @Test
-    void whenCompareByPriorityByDesc () {
-
+    void whenCompareByPriorityByDesc() {
         Comparator<Job> cmpNamePriority = new JobDescByPriority();
         int result = cmpNamePriority.compare(
                 new Job("Help mother", 2),
