@@ -11,7 +11,6 @@ import java.util.Map;
  * @version 1.0
  */
 public class BankService {
-
     /**
      * Хранилище пользователей(экземпляров класса
      * @see User).
