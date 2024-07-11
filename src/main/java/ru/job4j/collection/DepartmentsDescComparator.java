@@ -10,6 +10,6 @@ public class DepartmentsDescComparator implements Comparator<String> {
         int result = rightArr[0].compareTo(leftArr[0]);
         return result != 0
                 ? result
-                : leftArr[leftArr.length - 1].compareTo(rightArr[rightArr.length - 1]);
+                : left.compareTo(right);
     }
 }
