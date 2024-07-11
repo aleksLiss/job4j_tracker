@@ -2,6 +2,13 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+
+/**
+ * Класс, имитирующий пользователя банка.
+ * Содержит информацию о данных паспорта, имени.
+ * @author aleksLiss.
+ * @version 1.0
+ */
 public class User {
 
     private String passport;
@@ -28,6 +35,10 @@ public class User {
         this.username = username;
     }
 
+    /**
+     * Сравнение проводится по полю passport.
+     * @param = объект класса User.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -40,6 +51,10 @@ public class User {
         return Objects.equals(passport, user.passport);
     }
 
+    /**
+     * Хэш-код вычисляется на основании
+     * поля: passport.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(passport);
