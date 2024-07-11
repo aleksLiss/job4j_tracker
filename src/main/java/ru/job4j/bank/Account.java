@@ -9,7 +9,6 @@ import java.util.Objects;
  * @version 1.0
  */
 public class Account {
-
     /**
      * Поле, хранящее адрес реквизита.
      */
