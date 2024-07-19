@@ -17,7 +17,7 @@ class FunctionCalculatorTest {
     @Test
     void whenQuadraticFunctionThenQuadraticResults() {
         FunctionCalculator function = new FunctionCalculator();
-        List<Double> result = function.diapason(2, 5, x-> (x * x) + 1);
+        List<Double> result = function.diapason(2, 5, x -> (x * x) + 1);
         List<Double> expected = Arrays.asList(5D, 10D, 17D);
         assertThat(result).isEqualTo(expected);
     }
