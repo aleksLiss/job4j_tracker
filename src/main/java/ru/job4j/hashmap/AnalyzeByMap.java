@@ -1,6 +1,7 @@
 package ru.job4j.hashmap;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 public class AnalyzeByMap {
     public static double averageScore(List<Pupil> pupils) {
@@ -35,11 +36,10 @@ public class AnalyzeByMap {
         Map<String, Integer> map = new LinkedHashMap<>();
         List<Label> labels = new ArrayList<>();
         int amountOfPupils = pupils.size();
+        BiFunction<Integer, Integer, Integer> function = (oldVal, newVal) -> oldVal + newVal;
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                String nameOfSubject = subject.name();
-                int amount = map.getOrDefault(nameOfSubject, 0) + subject.score();
-                map.put(nameOfSubject, amount);
+                map.merge(subject.name(), subject.score(), function);
             }
         }
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -68,11 +68,10 @@ public class AnalyzeByMap {
     public static Label bestSubject(List<Pupil> pupils) {
         Map<String, Integer> map = new LinkedHashMap<>();
         List<Label> labels = new ArrayList<>();
+        BiFunction<Integer, Integer, Integer> function = (oldVal, newVal) -> oldVal + newVal;
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                String nameOfSubject = subject.name();
-                int amount = map.getOrDefault(nameOfSubject, 0) + subject.score();
-                map.put(nameOfSubject, amount);
+                map.merge(subject.name(), subject.score(), function);
             }
         }
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
