@@ -1,7 +1,6 @@
 package ru.job4j.stream;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import static ru.job4j.stream.Suit.*;
 import static ru.job4j.stream.Value.*;
@@ -34,7 +33,7 @@ public class Card {
         List<Card> cards = Stream.of(suits)
                 .flatMap(suit -> Stream.of(values)
                         .map(value -> new Card(suit, value)))
-                .toList();;
+                .toList();
     }
 }
 
