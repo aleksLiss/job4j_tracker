@@ -30,10 +30,10 @@ public class Card {
     public static void main(String[] args) {
         Suit[] suits = {Diamonds, Hearts, Spades, Clubs};
         Value[] values = {V_6, V_7, V_8};
-        List<Card> cards = Stream.of(suits)
+        Stream.of(suits)
                 .flatMap(suit -> Stream.of(values)
                         .map(value -> new Card(suit, value)))
-                .toList();
+                .forEach(System.out::println);
     }
 }
 
