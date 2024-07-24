@@ -1,6 +1,5 @@
 package ru.job4j.stream;
 
-import java.util.List;
 import java.util.stream.Stream;
 import static ru.job4j.stream.Suit.*;
 import static ru.job4j.stream.Value.*;
@@ -25,6 +24,14 @@ public class Card {
     public Card(Suit suit, Value value) {
         this.suit = suit;
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suit=" + suit +
+                ", value=" + value +
+                '}';
     }
 
     public static void main(String[] args) {
