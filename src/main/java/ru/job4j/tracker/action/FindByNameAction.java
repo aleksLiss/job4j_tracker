@@ -20,7 +20,7 @@ public class FindByNameAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, MemTracker tracker) {
         output.println("=== Вывод заявки по имени ===");
         String name = input.askStr("Enter name: ");
         List<Item> items = tracker.findByName(name);

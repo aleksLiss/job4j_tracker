@@ -2,13 +2,13 @@ package ru.job4j.tracker;
 
 import ru.job4j.tracker.pojo.Item;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tracker {
+public class MemTracker implements Store {
 
     private final List<Item> items = new ArrayList<>();
-
     private int ids = 1;
 
     public Item add(Item item) {
@@ -64,4 +64,7 @@ public class Tracker {
         return result;
     }
 
+    @Override
+    public void close() throws Exception {
+    }
 }
