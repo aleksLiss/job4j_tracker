@@ -44,6 +44,10 @@ public class SqlTracker implements Store {
         }
     }
 
+    private Item createItem(int id, String name, LocalDateTime created) {
+        return new Item(id, name, created);
+    }
+
     @Override
     public Item add(Item item) {
         int id = 0;
@@ -60,7 +64,6 @@ public class SqlTracker implements Store {
                      connection.prepareStatement("INSERT INTO tracker(id, name, created) VALUES(?, ?, ?)")) {
             long millis = System.currentTimeMillis();
             LocalDateTime currTime = new Timestamp(millis).toLocalDateTime();
-
             statement.setInt(1, id);
             statement.setString(2, item.getName());
             statement.setTimestamp(3, Timestamp.valueOf(currTime));
@@ -103,7 +106,7 @@ public class SqlTracker implements Store {
                      connection.prepareStatement("SELECT * FROM tracker")) {
             ResultSet set = statement.getResultSet();
             while (set.next()) {
-                items.add(new Item(set.getInt("id"),
+                items.add(createItem(set.getInt("id"),
                         set.getString("name"),
                         LocalDateTime.from(set.getTime("created").toLocalTime())));
             }
@@ -122,7 +125,7 @@ public class SqlTracker implements Store {
             statement.setString(1, key);
             ResultSet set = statement.getResultSet();
             while (set.next()) {
-                items.add(new Item(set.getInt("id"),
+                items.add(createItem(set.getInt("id"),
                         set.getString("name"),
                         LocalDateTime.from(set.getTime("created").toLocalTime())));
             }
@@ -141,7 +144,7 @@ public class SqlTracker implements Store {
             statement.setInt(1, id);
             ResultSet set = statement.getResultSet();
             while (set.next()) {
-                item = new Item(set.getInt("id"),
+                item = createItem(set.getInt("id"),
                         set.getString("name"),
                         LocalDateTime.from(set.getTime("created").toLocalTime()));
             }
@@ -151,4 +154,5 @@ public class SqlTracker implements Store {
         }
         return item;
     }
+
 }
