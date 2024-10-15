@@ -29,8 +29,8 @@ public class SqlTracker implements Store {
             Class.forName(config.getProperty("driver-class-name"));
             connection = DriverManager.getConnection(
                     config.getProperty("url"),
-                    config.getProperty("username"),
-                    config.getProperty("password")
+                    config.getProperty("postgres"),
+                    config.getProperty("123qwe!!")
             );
         } catch (Exception e) {
             throw new IllegalStateException(e);

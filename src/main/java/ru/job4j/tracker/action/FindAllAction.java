@@ -20,7 +20,7 @@ public class FindAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         output.println("=== Вывод всех заявок ===");
         List<Item> items = tracker.findAll();
         if (items.size() > 0) {

@@ -17,7 +17,7 @@ public class StartUI {
         this.output = output;
     }
 
-    public void init(Input input, MemTracker tracker, List<UserAction> actions) {
+    public void init(Input input, Store tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             showMenu(actions);
@@ -51,7 +51,7 @@ public class StartUI {
                     new FindByNameAction(output),
                     new ExitAction(output)
             );
-            new StartUI(output).init(input, (MemTracker) tracker, actions);
+            new StartUI(output).init(input, tracker, actions);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
