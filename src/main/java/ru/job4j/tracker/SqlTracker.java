@@ -47,16 +47,20 @@ public class SqlTracker implements Store {
 
     private List<Item> createItems(ResultSet set) throws SQLException {
         List<Item> items = new ArrayList<>();
-            Stream.of(set).peek(i -> {
-                try {
-                    items.add(new Item(i.getInt("id"),
-                            i.getString("name"),
-                            LocalDateTime.from(i.getTime("created").toLocalTime())));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            });
+        Stream.of(set).peek(i -> {
+            try {
+                items.add(createItem(i.getInt("id"),
+                        i.getString("name"),
+                        LocalDateTime.from(i.getTime("created").toLocalTime())));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
         return items;
+    }
+
+    private Item createItem(int id, String name, LocalDateTime created) throws SQLException {
+        return new Item(id, name, created);
     }
 
     @Override
@@ -65,8 +69,10 @@ public class SqlTracker implements Store {
         try (Statement statement =
                      connection.prepareStatement("SELECT COUNT(*) FROM tracker")) {
             ResultSet set = statement.getResultSet();
-            while (set.next()) {
-                id++;
+            if (set != null) {
+                while (set.next()) {
+                    id++;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,6 +155,14 @@ public class SqlTracker implements Store {
             ex.printStackTrace();
         }
         return item;
+    }
+
+    public static void main(String[] args) {
+        SqlTracker tracker = new SqlTracker();
+        tracker.init();
+        LocalDateTime time = LocalDateTime.now();
+//        tracker.add(new Item(1, "name_1", time));
+
     }
 
 }
