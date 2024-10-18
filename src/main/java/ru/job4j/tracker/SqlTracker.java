@@ -47,20 +47,12 @@ public class SqlTracker implements Store {
 
     private List<Item> createItems(ResultSet set) throws SQLException {
         List<Item> items = new ArrayList<>();
-        Stream.of(set).peek(i -> {
-            try {
-                items.add(createItem(i.getInt("id"),
-                        i.getString("name"),
-                        LocalDateTime.from(i.getTime("created").toLocalTime())));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+        while (set.next()) {
+            items.add(new Item(set.getInt("id"),
+                    set.getString("name"),
+                    LocalDateTime.from(set.getTime("created").toLocalTime())));
+        }
         return items;
-    }
-
-    private Item createItem(int id, String name, LocalDateTime created) throws SQLException {
-        return new Item(id, name, created);
     }
 
     @Override
@@ -135,6 +127,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM tracker WHERE name = ?")) {
             statement.setString(1, key);
+
             items = createItems(statement.getResultSet());
             statement.execute();
         } catch (SQLException ex) {
@@ -156,13 +149,4 @@ public class SqlTracker implements Store {
         }
         return item;
     }
-
-    public static void main(String[] args) {
-        SqlTracker tracker = new SqlTracker();
-        tracker.init();
-        LocalDateTime time = LocalDateTime.now();
-//        tracker.add(new Item(1, "name_1", time));
-
-    }
-
 }
