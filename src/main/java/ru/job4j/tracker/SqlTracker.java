@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Stream;
 
 public class SqlTracker implements Store {
 
@@ -45,14 +44,18 @@ public class SqlTracker implements Store {
         }
     }
 
-    private List<Item> createItems(ResultSet set) throws SQLException {
-        List<Item> items = new ArrayList<>();
-        while (set.next()) {
-            items.add(new Item(set.getInt("id"),
+    private Item createItemFromResultSet(ResultSet set) {
+        Item item = null;
+        try {
+            item = new Item(set.getInt("id"),
                     set.getString("name"),
-                    LocalDateTime.from(set.getTime("created").toLocalTime())));
+                    set.getTimestamp("created")
+                            .toLocalDateTime()
+                            .withNano(0));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        return items;
+        return item;
     }
 
     @Override
@@ -113,8 +116,10 @@ public class SqlTracker implements Store {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM tracker")) {
-            items = createItems(statement.getResultSet());
             statement.execute();
+            while (statement.getResultSet().next()) {
+                items.add(createItemFromResultSet(statement.getResultSet()));
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -127,9 +132,10 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM tracker WHERE name = ?")) {
             statement.setString(1, key);
-
-            items = createItems(statement.getResultSet());
             statement.execute();
+            while (statement.getResultSet().next()) {
+                items.add(createItemFromResultSet(statement.getResultSet()));
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -142,8 +148,8 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM tracker WHERE id = ?")) {
             statement.setInt(1, id);
-            item = createItems(statement.getResultSet()).get(0);
             statement.execute();
+            item = createItemFromResultSet(statement.getResultSet());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
