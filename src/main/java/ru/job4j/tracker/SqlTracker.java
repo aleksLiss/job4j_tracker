@@ -76,11 +76,9 @@ public class SqlTracker implements Store {
         }
         try (PreparedStatement statement =
                      connection.prepareStatement("INSERT INTO items(id, name, created) VALUES(?, ?, ?)")) {
-            long millis = System.currentTimeMillis();
-            LocalDateTime currTime = new Timestamp(millis).toLocalDateTime();
             statement.setInt(1, id);
             statement.setString(2, item.getName());
-            statement.setTimestamp(3, Timestamp.valueOf(currTime));
+            statement.setTimestamp(3, Timestamp.valueOf(item.getCreated()));
             statement.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
