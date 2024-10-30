@@ -19,11 +19,12 @@ public class SqlTracker implements Store {
 
     public SqlTracker(Connection connection) {
         this.connection = connection;
+        init();
     }
 
     private void init() {
         try (InputStream input = SqlTracker.class.getClassLoader()
-                .getResourceAsStream("db/liquibase.properties")) {
+                .getResourceAsStream("db/liquibase_test.properties")) {
             Properties config = new Properties();
             config.load(input);
             Class.forName(config.getProperty("driver-class-name"));
@@ -61,8 +62,9 @@ public class SqlTracker implements Store {
     @Override
     public Item add(Item item) {
         int id = 0;
-        try (Statement statement =
-                     connection.prepareStatement("SELECT COUNT(*) FROM tracker")) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement("SELECT * FROM items")) {
+            statement.execute();
             ResultSet set = statement.getResultSet();
             if (set != null) {
                 while (set.next()) {
@@ -73,7 +75,7 @@ public class SqlTracker implements Store {
             e.printStackTrace();
         }
         try (PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO tracker(id, name, created) VALUES(?, ?, ?)")) {
+                     connection.prepareStatement("INSERT INTO items(id, name, created) VALUES(?, ?, ?)")) {
             long millis = System.currentTimeMillis();
             LocalDateTime currTime = new Timestamp(millis).toLocalDateTime();
             statement.setInt(1, id);
@@ -89,7 +91,7 @@ public class SqlTracker implements Store {
     @Override
     public boolean replace(int id, Item item) {
         try (PreparedStatement statement =
-                     connection.prepareStatement("UPDATE tracker SET name = ?, created = ? WHERE id = ?")) {
+                     connection.prepareStatement("UPDATE items SET name = ?, created = ? WHERE id = ?")) {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             statement.setInt(3, id);
@@ -103,7 +105,7 @@ public class SqlTracker implements Store {
     @Override
     public void delete(int id) {
         try (PreparedStatement statement =
-                     connection.prepareStatement("DELETE FROM tracker WHERE id = ?")) {
+                     connection.prepareStatement("DELETE FROM items WHERE id = ?")) {
             statement.setInt(1, id);
             statement.execute();
         } catch (SQLException ex) {
@@ -115,7 +117,7 @@ public class SqlTracker implements Store {
     public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM tracker")) {
+                     connection.prepareStatement("SELECT * FROM items")) {
             statement.execute();
             while (statement.getResultSet().next()) {
                 items.add(createItemFromResultSet(statement.getResultSet()));
@@ -130,7 +132,7 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM tracker WHERE name = ?")) {
+                     connection.prepareStatement("SELECT * FROM items WHERE name = ?")) {
             statement.setString(1, key);
             statement.execute();
             while (statement.getResultSet().next()) {
@@ -146,10 +148,12 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item item = null;
         try (PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM tracker WHERE id = ?")) {
+                     connection.prepareStatement("SELECT * FROM items WHERE id = ?")) {
             statement.setInt(1, id);
             statement.execute();
-            item = createItemFromResultSet(statement.getResultSet());
+            while (statement.getResultSet().next()) {
+                item = (createItemFromResultSet(statement.getResultSet()));
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
