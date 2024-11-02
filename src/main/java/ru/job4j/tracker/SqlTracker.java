@@ -61,7 +61,7 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        int id = 0;
+        int id = 1;
         try (PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM items")) {
             statement.execute();

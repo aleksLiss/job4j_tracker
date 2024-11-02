@@ -52,7 +52,7 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
+        Item item = new Item(1, "item");
         tracker.add(item);
         Item result = tracker.findById(item.getId());
         assertThat(result).isEqualTo(item);
@@ -61,7 +61,7 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndFindByNameThenMustBeSame() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item1");
+        Item item = new Item(1, "item1");
         tracker.add(item);
         Item result = tracker.findByName("item1").get(0);
         assertThat(result).isEqualTo(item);
@@ -70,8 +70,8 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveSomeItemsAndFindAllThenFindAllItems() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item itemOne = new Item("item1");
-        Item itemTwo = new Item("item2");
+        Item itemOne = new Item(1, "item1");
+        Item itemTwo = new Item(2, "item2");
         tracker.add(itemOne);
         tracker.add(itemTwo);
         List<Item> expected = List.of(itemOne, itemTwo);
@@ -82,11 +82,11 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndReplaceToOtherItemThenMustBeReplaced() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item firstIt = new Item("item1");
-        Item secondIt = new Item("item2");
+        Item firstIt = new Item(1,"item1");
+        Item secondIt = new Item(2,"item2");
         tracker.add(firstIt);
         tracker.replace(firstIt.getId(), secondIt);
-        Item result = tracker.findById(secondIt.getId());
+        Item result = tracker.findById(1);
         assertThat(result).isEqualTo(secondIt);
     }
 
