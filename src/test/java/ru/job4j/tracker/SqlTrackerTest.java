@@ -82,8 +82,8 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndReplaceToOtherItemThenMustBeReplaced() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item firstIt = new Item(1,"item1");
-        Item secondIt = new Item(2,"item2");
+        Item firstIt = new Item(1, "item1");
+        Item secondIt = new Item(2, "item2");
         tracker.add(firstIt);
         tracker.replace(firstIt.getId(), secondIt);
         Item result = tracker.findById(1);
