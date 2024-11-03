@@ -55,7 +55,6 @@ public class SqlTrackerTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @Disabled
     @Test
     public void whenSaveItemAndFindByNameThenMustBeSame() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -65,7 +64,6 @@ public class SqlTrackerTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @Disabled
     @Test
     public void whenSaveSomeItemsAndFindAllThenFindAllItems() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -78,7 +76,6 @@ public class SqlTrackerTest {
         assertThat(result).isNotEmpty().hasSize(2).containsSequence(expected);
     }
 
-    @Disabled
     @Test
     public void whenSaveItemAndReplaceToOtherItemThenMustBeReplaced() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -90,7 +87,6 @@ public class SqlTrackerTest {
         assertThat(result).isEqualTo(secondIt);
     }
 
-    @Disabled
     @Test
     public void whenSaveItemAndDeleteItThenFindByIdMustBeNull() {
         SqlTracker tracker = new SqlTracker(connection);
