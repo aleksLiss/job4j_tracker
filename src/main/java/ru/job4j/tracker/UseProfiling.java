@@ -4,7 +4,6 @@ import ru.job4j.tracker.input.ConsoleInput;
 import ru.job4j.tracker.output.Output;
 import ru.job4j.tracker.output.StubOutput;
 
-
 public class UseProfiling {
     public static void main(String[] args) {
         try {
