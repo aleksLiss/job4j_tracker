@@ -9,7 +9,6 @@ import ru.job4j.tracker.output.StubOutput;
 import ru.job4j.tracker.pojo.Item;
 
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -24,7 +23,7 @@ class CreateActionTest {
     public void whenItemWasCreateSuccessfully() {
         Store tracker = new MemTracker();
         Item item = new Item("Created item");
-        item.setCreated(item.getCreated().truncatedTo(ChronoUnit.SECONDS));
+        item.setCreated(item.getCreated());
         Output output = new StubOutput();
         CreateAction createAction = new CreateAction(output);
         Input input = mock(Input.class);
