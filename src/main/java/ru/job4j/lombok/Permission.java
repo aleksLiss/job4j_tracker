@@ -17,15 +17,3 @@ public class Permission {
     @Singular("accessTo")
     private List<String> rules;
 }
-
-class Test {
-    public static void main(String[] args) {
-        var permission = Permission.start()
-                .id(1)
-                .name("permit")
-                .accessTo("rule_1")
-                .accessTo("rule_2")
-                .accessTo("rule_3")
-                .build();
-    }
-}
