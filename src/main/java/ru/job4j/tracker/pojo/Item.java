@@ -32,7 +32,7 @@ public class Item {
     public Item(int id, String name, LocalDateTime created) {
         this.id = id;
         this.name = name;
-        this.created = created;
+        this.created = created.truncatedTo(ChronoUnit.SECONDS);
     }
 
     @Override
