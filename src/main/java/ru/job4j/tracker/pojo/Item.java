@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 @EqualsAndHashCode(of = {"name"})
 @NoArgsConstructor
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
